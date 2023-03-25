@@ -47,7 +47,7 @@ links.forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
     const page = link.dataset.page;
-    fetch(`/content/${page}.html`)
+    fetch(`content/${page}.html`)
       .then(response => response.text())
       .then(data => {
         const content = document.querySelector('#content');
@@ -57,7 +57,7 @@ links.forEach(link => {
       .catch(error => {
         console.error(`Error loading ${page}.html`, error);
         const content = document.querySelector('#content');
-        fetch('/content/home.html')
+        fetch('content/home.html')
           .then(response => response.text())
           .then(data => {
             content.innerHTML = data;
@@ -68,7 +68,7 @@ links.forEach(link => {
 
 document.addEventListener("DOMContentLoaded", function() {
     const content = document.querySelector('#content');
-    fetch('/content/home.html')
+    fetch('content/home.html')
       .then(response => response.text())
       .then(data => {
         content.innerHTML = data;
@@ -85,7 +85,7 @@ function loadImage() {
 
   for (let i = 1; i <= 19; i++) {
     images.push({
-      src: `/images/art/${i}.png`,
+      src: `images/art/${i}.png`,
       caption: `Image ${i}`
     });
   }
