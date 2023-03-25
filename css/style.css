@@ -1,24 +1,25 @@
     
     body {        
-        margin: 0;
+        margin-top: 5vh;
         padding: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow-x: hidden; /* optional */
-        overflow-y: hidden; /* optional */
+        height: 95vh;
         transition: background-color 0.5s ease;
     }
 
-    .left,
+    .navbar {
+        height: 5vh;
+    }
+
     .dark-mode {
         background-color: #333333;
         color: #ffffff;
     }
 
     .left {
-        height: 100vh;
+        min-height: 95vh;
         overflow-y: hidden; /* optional */
     }
+
     .toggle-dark-mode {
         cursor: pointer;
         margin-left: 10px;
