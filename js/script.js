@@ -5,8 +5,8 @@ function toggleDarkMode() {
 
     const toggleButton = document.querySelector(".toggle-dark-mode");
     const toggleIcon = toggleButton.querySelector("i");
-    toggleIcon.classList.toggle("fa-toggle-on");
-    toggleIcon.classList.toggle("fa-toggle-off");
+    toggleIcon.classList.toggle("fas fa-moon");
+    toggleIcon.classList.toggle("fas fa-sum");
 
     localStorage.setItem('isDarkMode', isDarkMode);
 }
@@ -52,7 +52,10 @@ links.forEach(link => {
       .then(data => {
         const content = document.querySelector('#content');
         content.innerHTML = data;
-        if(page == 'art') loadImage();
+        if(page == 'original') loadImage('original', 'gallery_original');
+        if(page == 'commission') loadImage('commission', 'gallery_commission');
+        if(page == 'fanart') loadImage('fanart', 'gallery_fanart');
+        if(page == 'clay') loadImage('clay', 'gallery_clay');
       })
       .catch(error => {
         console.error(`Error loading ${page}.html`, error);
@@ -78,52 +81,43 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   });
 
-function loadImage() {      
-  console.log('載入圖片');
-  const gallery = document.querySelector('#gallery');
-  const images = [];
+function loadImage(folder, id) {
+  fetch(`img/${folder}/info.json`)
+    .then(res => res.json())
+    .then(imageList => {
+      const gallery = document.getElementById(id);
+      gallery.innerHTML = '';
 
-  for (let i = 1; i <= 19; i++) {
-    images.push({
-      src: `images/art/${i}.png`,
-      caption: `Image ${i}`
-    });
-  }
+      imageList.forEach(({ src, caption }) => {
+        const fullPath = `img/${folder}/${src}`;
 
-  // 生成圖片元素
-  function createImageElement(image) {
-    const img = document.createElement('img');
-    img.src = image.src;
-    img.className = "img img-fluid";
-    const a = document.createElement('a');
-    a.dataset.fancybox = 'gallery',
-    a.href = image.src,
-    a.appendChild(img);
-    const figure = document.createElement('div');
-    figure.className="col-sm-6 col-md-3 col-lg-2 col-xl-2 item box"
-    figure.appendChild(a);
-    gallery.appendChild(figure);
-  };
+        const img = document.createElement('img');
+        img.className = "img img-fluid";
+        img.src = fullPath;
+        img.alt = caption;
 
-  // 生成圖片
-  images.forEach(createImageElement);
-    
-  $(function(){
-    $('.masonry').masonry({
-        itemSelector: '.item'
-    });
-  });
-  $(function(){
-      var $container = $('.masonry');
-      $container.imagesLoaded(function(){
-          $container.masonry({
-          itemSelector: '.item'
-          })
+        const a = document.createElement('a');
+        a.href = fullPath;
+        a.dataset.fancybox = 'gallery';
+        a.dataset.caption = caption;
+        a.title = caption;
+        a.appendChild(img);
+
+        const figure = document.createElement('div');
+        figure.className = "col-sm-6 col-md-4 col-lg-3 item box";
+        figure.appendChild(a);
+
+        gallery.appendChild(figure);
       });
-  });
 
-  // 使用 imagesLoaded 確保所有圖片都已載入
-  imagesLoaded(gallery, function() {
-    masonry.layout();
-  });
+      // 確保圖片載入後再初始化 masonry
+      $('.masonry').imagesLoaded(function () {
+        $('.masonry').masonry({
+          itemSelector: '.item'
+        });
+      });
+    })
+    .catch(err => {
+      console.error('讀取 JSON 失敗', err);
+    });
 }

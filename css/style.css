@@ -18,6 +18,7 @@
     .left {
         min-height: 95vh;
         overflow-y: hidden; /* optional */
+        border-right: 1px solid #dee2e6;
     }
 
     .toggle-dark-mode {
@@ -41,12 +42,12 @@
         margin-top: 20px;
     }
 
-    .link {
-        color: #FFA500;
+    a {
+        color: #6C757D;
     }
 
-    .link:hover {
-        color: #FF007F;
+    a:hover {
+        color: #17A2B8;
     }
 
     .toggle-dark-mode {
@@ -60,17 +61,10 @@
     figure {
         padding-right: 30px;
     }
-  @media (max-width: 767px) {
-    h2 {
+    h4 {
       margin-top: 40px;
     }
-  }
   
-  @media (min-width: 768px) {
-    .col-md-2:first-child {
-      border-right: 1px solid #dee2e6;
-    }
-  }
   
 /*=====畫廊效果=====*/
 .masonry,
@@ -94,6 +88,6 @@
 }
 
 iframe {
-    display: block;
     margin: 0 auto;
+    position:relative;
 }
