@@ -52,6 +52,7 @@ links.forEach(link => {
       .then(data => {
         const content = document.querySelector('#content');
         content.innerHTML = data;
+        if(page == 'ai') loadImage('ai', 'gallery_ai');
         if(page == 'original') loadImage('original', 'gallery_original');
         if(page == 'commission') loadImage('commission', 'gallery_commission');
         if(page == 'fanart') loadImage('fanart', 'gallery_fanart');
