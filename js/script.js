@@ -52,7 +52,13 @@ links.forEach(link => {
       .then(data => {
         const content = document.querySelector('#content');
         content.innerHTML = data;
-        if(page == 'ai') loadImage('ai', 'gallery_ai');
+        if(page == 'ai')
+        {
+          for(let i = 1; i <= 7; i++)
+          {
+            loadCarouselFromJson('ai', `info_${i}.json`, `gallery_${i}`);
+          }
+        }
         if(page == 'original') loadImage('original', 'gallery_original');
         if(page == 'commission') loadImage('commission', 'gallery_commission');
         if(page == 'fanart') loadImage('fanart', 'gallery_fanart');
@@ -120,5 +126,123 @@ function loadImage(folder, id) {
     })
     .catch(err => {
       console.error('讀取 JSON 失敗', err);
+    });
+}
+
+
+
+
+function loadCarouselFromJson(folder, infoFile, carouselId) {
+  fetch(`img/${folder}/${infoFile}`)
+    .then(res => res.json())
+    .then(imageList => {
+      const container = document.getElementById(carouselId);
+      container.innerHTML = '';
+
+      const carousel = document.createElement('div');
+      carousel.id = carouselId;
+      carousel.className = 'carousel slide';
+      carousel.setAttribute('data-bs-ride', 'carousel');
+
+      const inner = document.createElement('div');
+      inner.className = 'carousel-inner';
+
+      const hasMultipleImages = imageList.length > 1;
+
+      const indicators = document.createElement('div');
+      indicators.className = 'carousel-indicators';
+
+      imageList.forEach((item, index) => {
+        const imgSrc = `img/${folder}/${item.src}`;
+
+        // Carousel Indicators (only if multiple)
+        if (hasMultipleImages) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.setAttribute('data-bs-target', `#${carouselId}`);
+          btn.setAttribute('data-bs-slide-to', index);
+          btn.setAttribute('aria-label', `Slide ${index + 1}`);
+          if (index === 0) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-current', 'true');
+          }
+          indicators.appendChild(btn);
+        }
+
+        // Carousel Item
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'carousel-item' + (index === 0 ? ' active' : '');
+
+        // Fancybox clickable image
+        const a = document.createElement('a');
+        a.href = imgSrc;
+        a.setAttribute('data-fancybox', `${carouselId}-gallery`);
+        a.setAttribute('data-caption', item.caption || item.title || '');
+
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.className = 'd-block w-100';
+        img.alt = item.caption || '';
+
+        a.appendChild(img);
+        carouselItem.appendChild(a);
+
+        // Caption
+        if (item.title || item.caption) {
+          const caption = document.createElement('div');
+          caption.className = 'carousel-caption d-none d-md-block';
+
+          if (item.title) {
+            const h5 = document.createElement('h5');
+            h5.textContent = item.title;
+            caption.appendChild(h5);
+          }
+
+          if (item.caption) {
+            const p = document.createElement('p');
+            p.textContent = item.caption;
+            caption.appendChild(p);
+          }
+
+          carouselItem.appendChild(caption);
+        }
+
+        inner.appendChild(carouselItem);
+      });
+
+      carousel.appendChild(inner);
+
+      if (hasMultipleImages) {
+        // Only add indicators and controls if more than one image
+        carousel.appendChild(indicators);
+
+        const prev = document.createElement('button');
+        prev.className = 'carousel-control-prev';
+        prev.type = 'button';
+        prev.setAttribute('data-bs-target', `#${carouselId}`);
+        prev.setAttribute('data-bs-slide', 'prev');
+        prev.innerHTML = `
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        `;
+
+        const next = document.createElement('button');
+        next.className = 'carousel-control-next';
+        next.type = 'button';
+        next.setAttribute('data-bs-target', `#${carouselId}`);
+        next.setAttribute('data-bs-slide', 'next');
+        next.innerHTML = `
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        `;
+
+        carousel.appendChild(prev);
+        carousel.appendChild(next);
+      }
+
+      container.appendChild(carousel);
+    })
+    .catch(err => {
+      console.error('載入 JSON 失敗:', err);
     });
 }
