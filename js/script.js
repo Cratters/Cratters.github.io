@@ -111,7 +111,7 @@ function loadImage(folder, id) {
         a.appendChild(img);
 
         const figure = document.createElement('div');
-        figure.className = "col-sm-6 col-md-4 col-lg-3 item box";
+        figure.className = "col-12 col-md-4 col-lg-3 item box";
         figure.appendChild(a);
 
         gallery.appendChild(figure);

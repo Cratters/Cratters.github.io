@@ -19,13 +19,26 @@
   </head>
   <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-secondary">
-      <div class="container-fluid">
+      <div class="container-fluid  bg-secondary">
         <a class="navbar-brand link text-black-50" href="#" data-page="home"><h3>7R個人作品集</h3></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
+            <div class="d-block d-md-none">
+                <li><a class="nav-item text-light link" href="#" data-page="ai">AI</a></li>
+                <li><a class="nav-item text-light link" href="#" data-page="commission">委託</a></li>
+                <li><a class="nav-item text-light link" href="#" data-page="fanart">二創</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="nav-item text-light link" href="#" data-page="clay">黏土</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="nav-item text-light link" href="#" data-page="cd">蛋糕狗</a></li>
+                <li><a class="nav-item text-light link" href="#" data-page="es">密室逃脫</a></li>
+                <li><a class="nav-item text-light link" href="#" data-page="bo">BreakOut</a></li>
+                <li><a class="nav-item text-light link" href="#" data-page="cn">糖果夢魘</a></li>
+                <li><a class="nav-item text-light link" href="#" data-page="da">深海探險</a></li>
+            </div>
             <li class="nav-item">
               <div class="toggle-dark-mode bg-secondary" onclick="toggleDarkMode()">
                 <i class="fas fa-moon" style="color: white;"></i>
@@ -38,7 +51,7 @@
     
     <div class="container-fluid">
       <div class="row">
-        <div class="left fixed-bottom col-md-2">
+        <div class="left fixed-bottom col-md-2 d-none d-md-block">
           <figure class="text-end">
             <!-- <h4 data-bs-toggle="collapse" data-bs-target="#phaser" aria-expanded="false" aria-controls="phaser">
               ▸Phaser
@@ -91,15 +104,15 @@
               <div><a href="#" class="link" data-page="cd">蛋糕狗</a></div>
               <div><a href="#" class="link" data-page="es">密室逃脫</a></div>
               <div><a href="#" class="link" data-page="bo">BreakOut</a></div>
-              <div></ul><a href="#" class="link" data-page="cn">糖果夢魘</a></div>
-              <div></ul><a href="#" class="link" data-page="da">深海探險</a></div>
+              <div><a href="#" class="link" data-page="cn">糖果夢魘</a></div>
+              <div><a href="#" class="link" data-page="da">深海探險</a></div>
             </div>
 
 
           </figure>
         </div>
-        <div class="col-md-2"></div>
-        <div class="right col-md-10">
+        <div class="d-none d-md-block col-md-2"></div>
+        <div class="right col-xs-12 col-md-10">
           <div id="content"></div>
         </div>
       </div>

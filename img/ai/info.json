@@ -1,9 +1,18 @@
 [
-    { "src": "1-1.png", "caption": "概念草圖" },
+    { "src": "1-1.png", "caption": "概念草圖，費時約2h" },
     { "src": "1-2.png", "caption": "ComyfyUI Illustrious模型 圖生圖" },
-    { "src": "1-5.png", "caption": "設定和細節修復" },
-    { "src": "2-1.png", "caption": "概念草圖" },
+    { "src": "1-3.png", "caption": "設定和細節修復，費時約6h" },
+    { "src": "1-4.png", "caption": "高清修復" },
+    { "src": "1-5.png", "caption": "裸體差分" },
+    { "src": "2-1.png", "caption": "概念草圖，費時約0.5h" },
     { "src": "2-2.png", "caption": "ComyfyUI Illustrious模型+Lora 圖生圖 頭部重繪" },
-    { "src": "2-3.png", "caption": "設定和細節修復" }
+    { "src": "2-3.png", "caption": "設定和細節修復，費時約4h" },
+    { "src": "3-1.png", "caption": "概念草圖，費時約5h" },
+    { "src": "3-2.png", "caption": "ComyfyUI Illustrious模型+Lora 圖生圖 頭部重繪" },
+    { "src": "3-3.png", "caption": "設定和細節修復，費時約6h" },
+    { "src": "4-1.png", "caption": "H差分製作-1" },
+    { "src": "4-2.png", "caption": "H差分製作-2" },
+    { "src": "4-3.png", "caption": "H差分製作-3" },
+    { "src": "4-4.png", "caption": "H差分製作-4" }
 ]
   
